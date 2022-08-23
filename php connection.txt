@@ -1,0 +1,27 @@
+<?php
+
+$mysqli = mysqli_connect("localhost", "mi_usuario", "mi_contraseña", "nombre_base");
+
+/* comprobar la conexión */
+// validacion si falla conexión a db
+if (mysqli_connect_errno()) {
+    printf("Falló la conexión: %s\n", mysqli_connect_error());
+    exit();
+}
+
+//para que pueda trabjar con caracteres latinos
+mysqli_set_charset($mysqli,"utf8");
+
+//validacion si no encuentra base de datos
+mysqli_select_db($mysqli,$nombredebase) or die ("No se encuentra la BBDD");
+
+//cerrar conexión
+mysqli_close($mysqli);
+
+//devuelve cuantas filas fueron afectadas para querys tipo insert, delete, update
+mysqli_affected_rows($mysqli)
+
+//evitar inyeccion sql
+mysqli_real_escape_string("coneccion sql","cadena a verificar"); //ignora caracteres que no sean numeros o letras
+
+?>
